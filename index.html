@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanmay Sherekar | Full Stack PHP & DevOps Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    *{
+         font-family: "Roboto", sans-serif;
+         font-optical-sizing: auto;
+        font-style: normal;
+    }
+    /* Loader */
+    #loader {
+      transition: opacity 0.5s ease;
+    }
+
+    /* Scroll animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .animate-on-scroll.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card hover */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Button hover */
+    .btn-animate {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-animate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Skill badge */
+    .skill {
+      background-color: #f3f4f6;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .typing-cursor::after {
+  content: "|";
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* ===== WhatsApp Floating Button ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  width: 52px;
+  height: 52px;
+  background-color: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  z-index: 50;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+}
+
+  </style>
+</head>
+
+<!-- ===== WhatsApp Floating Button ===== -->
+<a
+  href="https://wa.me/917276607140?text=Hello%20Tanmay,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
+  target="_blank"
+  class="whatsapp-float"
+  aria-label="Chat on WhatsApp"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="26" height="26">
+    <path d="M16.003 3C9.383 3 4 8.383 4 15.003c0 2.646.862 5.1 2.327 7.088L4 29l7.145-2.293a11.93 11.93 0 004.858 1.022h.001C22.624 27.729 28 22.345 28 15.003 28 8.383 22.624 3 16.003 3zm6.588 16.939c-.275.772-1.38 1.413-2.205 1.587-.567.118-1.307.211-4.184-.895-3.682-1.415-6.067-4.9-6.254-5.155-.184-.255-1.5-1.996-1.5-3.805 0-1.81.948-2.7 1.283-3.068.336-.368.734-.46.98-.46.245 0 .49.003.703.013.226.01.528-.086.826.63.305.73 1.04 2.523 1.133 2.707.092.184.153.399.03.654-.123.255-.184.398-.368.613-.184.215-.39.48-.555.644-.184.184-.376.38-.162.747.215.368.958 1.58 2.057 2.559 1.416 1.263 2.612 1.656 2.98 1.84.368.184.583.153.798-.092.215-.245.918-1.07 1.164-1.438.245-.368.49-.306.826-.184.336.123 2.13 1.005 2.497 1.187.368.184.613.276.705.43.092.153.092.895-.184 1.667z"/>
+  </svg>
+</a>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- ================= Loader ================= -->
+<div id="loader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+  <div class="flex flex-col items-center">
+    <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    <p class="mt-4 text-gray-600 font-medium">Loading...</p>
+  </div>
+</div>
+
+<!-- ================= Header ================= -->
+<header class="bg-white shadow sticky top-0 z-40">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 drop-shadow-lg">
+  Tanmay Sherekar
+</h1>
+
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex space-x-6">
+    <a href="#about" class="hover:underline hover:decoration-orange-500 decoration-2">About</a>
+    <a href="#skills" class="hover:underline hover:decoration-orange-500 decoration-2">Skills</a>
+    <a href="#projects" class="hover:underline hover:decoration-orange-500 decoration-2">Projects</a>
+    <a href="#contact" class="hover:underline hover:decoration-orange-500 decoration-2">Contact</a>
+    </nav>
+
+
+    <!-- Mobile Menu Button -->
+    <button id="menuBtn" class="md:hidden cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden bg-white border-t md:hidden">
+    <a href="#about" class="block px-4 py-3 hover:bg-gray-100">About</a>
+    <a href="#skills" class="block px-4 py-3 hover:bg-gray-100">Skills</a>
+    <a href="#projects" class="block px-4 py-3 hover:bg-gray-100">Projects</a>
+    <a href="#contact" class="block px-4 py-3 hover:bg-gray-100">Contact</a>
+  </div>
+</header>
+
+<!-- ================= Hero (BACKGROUND IMAGE + TYPING) ================= -->
+<section
+  class="relative h-screen flex items-center justify-center text-white"
+  style="background-image: url('img/banner.jpg'); background-size: cover; background-position: center;"
+>
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 text-center animate-on-scroll">
+    <h2 class="text-3xl md:text-5xl font-bold mb-4">
+      <span id="typing-text" class="typing-cursor"></span>
+    </h2>
+    <p class="text-base md:text-lg mb-6 opacity-90">
+      Building scalable web applications & automating deployments
+    </p>
+    <a href="#projects"
+       class="btn-animate relative inline-block px-8 py-3 font-semibold rounded-lg text-white bg-orange-600 overflow-hidden group hover:scale-105 hover:shadow-xl transform transition duration-300 cursor-pointer">
+      <span class="relative z-10">View My Work</span>
+    </a>
+  </div>
+</section>
+
+
+
+<!-- ================= About ================= -->
+<section id="about" class="py-12 md:py-16 px-4 animate-on-scroll bg-black">
+  <div class="max-w-6xl mx-auto text-white">
+    <h3 class="text-2xl md:text-3xl font-bold mb-4">About Me</h3>
+    <p class="text-gray-300 leading-relaxed mb-4">
+  I am a passionate and results-driven Full Stack Web Developer with strong hands-on experience in PHP, WordPress, frontend technologies, and a growing specialization in DevOps and Cloud Engineering. Over the past few years, I have worked across multiple roles including junior PHP developer, software developer, WordPress developer, and freelance engineer, which has helped me build a solid foundation in both application development and deployment practices. I enjoy working at the intersection of development and operations, where code meets infrastructure, automation, and performance optimization.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  My professional journey started with a strong interest in web technologies such as HTML, CSS, and JavaScript. As I progressed, I moved deeper into backend development using Core PHP and MySQL, building dynamic, data-driven applications. I have worked extensively with WordPress, not just as a CMS user but as a developer who understands theme customization, plugin integration, performance optimization, security hardening, and server-side configurations. This experience allowed me to deliver real-world projects for businesses, healthcare platforms, and service-based websites, ensuring scalability, responsiveness, and maintainability.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  While working on PHP and WordPress projects, I developed a strong understanding of how production systems behave in real environments. This naturally led me toward DevOps and cloud technologies. I realized that writing good code is only one part of building reliable systems—deploying, monitoring, scaling, and securing applications is equally important. This realization motivated me to upskill myself in Linux administration, Docker, CI/CD pipelines, and AWS cloud services.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  I have hands-on experience working with Linux-based servers, where I manage application deployments, configure web servers, troubleshoot performance issues, and maintain system stability. I actively use Docker to containerize PHP and WordPress applications, ensuring consistency across development, testing, and production environments. By creating Dockerized setups with Nginx, PHP-FPM, and MySQL, I am able to reduce deployment issues and improve development efficiency.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  In the DevOps space, I have worked with CI/CD tools such as GitHub Actions and Jenkins to automate build, test, and deployment workflows. I believe automation is a key pillar of modern software delivery, and I continuously look for ways to eliminate manual steps, reduce errors, and speed up release cycles. My pipelines focus on code quality, repeatability, and reliability, helping teams deliver updates faster and with greater confidence.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  On the cloud side, I have practical experience with AWS services such as EC2, IAM, and basic networking concepts. I understand how to deploy applications on cloud infrastructure, manage access securely, and optimize resources for performance and cost efficiency. I am actively expanding my cloud knowledge to include advanced AWS services, infrastructure best practices, and container orchestration concepts like Kubernetes, with the goal of becoming a well-rounded DevOps engineer.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  What sets me apart is my ability to understand the full lifecycle of a web application—from designing user-friendly interfaces and writing backend logic to deploying applications on cloud servers and automating workflows. My background as a developer helps me collaborate effectively with development teams, while my DevOps skills allow me to think proactively about scalability, security, and operational stability.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  I have worked in contractual roles, internships, and freelance projects, which has taught me adaptability, accountability, and effective communication. These experiences helped me understand real client requirements, tight deadlines, and the importance of delivering quality work consistently. I am comfortable working independently as well as collaborating within a team environment, following best practices and continuously learning from feedback.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  I strongly believe in continuous learning and self-improvement. Technology evolves rapidly, and I make it a point to stay updated with industry trends, best practices, and emerging tools. Whether it’s improving my PHP coding standards, learning new DevOps tools, or understanding cloud cost optimization strategies, I approach learning with curiosity and discipline.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  Beyond technical skills, I value clarity, problem-solving, and reliability. I enjoy breaking down complex problems into manageable solutions and building systems that are not only functional but also efficient and maintainable. I take pride in writing clean, readable code and setting up systems that others can easily understand and extend.
+</p>
+
+<p class="text-gray-300 leading-relaxed mb-4">
+  Looking ahead, my goal is to grow as a Full Stack Developer with a strong DevOps mindset or transition fully into a DevOps/Cloud Engineer role. I am particularly interested in working on scalable systems, cloud-native applications, and automated infrastructure. I am open to full-time roles, contract opportunities, and challenging projects where I can contribute meaningfully while continuing to grow technically.
+</p>
+
+<p class="text-gray-300 leading-relaxed">
+  If you are looking for someone who understands both development and deployment, values automation, and is committed to building stable, scalable solutions, I would be excited to connect and explore opportunities to work together.
+</p>
+
+  </div>
+</section>
+
+
+<!-- ================= Skills (Timeline with Icons) ================= -->
+<section id="skills" class="py-12 md:py-16 px-4 animate-on-scroll bg-orange-100">
+  <div class="max-w-4xl mx-auto">
+    <h3 class="text-2xl md:text-3xl font-bold mb-12 text-center">Skills</h3>
+
+    <div class="relative">
+      <!-- Vertical Line Centered -->
+      <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-orange-400"></div>
+
+      <!-- Skill Item Template -->
+      <!-- Left Item -->
+      <div class="mb-10 w-full flex justify-start items-center">
+        <div class="w-1/2 pr-8 text-right">
+          <div class="inline-flex items-center justify-end bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-6 h-6 mr-2" alt="HTML"/>
+            <h4 class="text-lg font-semibold">HTML</h4>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+      </div>
+
+      <!-- Right Item -->
+      <div class="mb-10 w-full flex justify-end items-center">
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+        <div class="w-1/2 pl-8 text-left">
+          <div class="inline-flex items-center bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-6 h-6 mr-2" alt="CSS"/>
+            <h4 class="text-lg font-semibold">CSS</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Item -->
+      <div class="mb-10 w-full flex justify-start items-center">
+        <div class="w-1/2 pr-8 text-right">
+          <div class="inline-flex items-center justify-end bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-6 h-6 mr-2" alt="JS"/>
+            <h4 class="text-lg font-semibold">JavaScript</h4>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+      </div>
+
+      <!-- Right Item -->
+      <div class="mb-10 w-full flex justify-end items-center">
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+        <div class="w-1/2 pl-8 text-left">
+          <div class="inline-flex items-center bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" class="w-6 h-6 mr-2" alt="Tailwind"/>
+            <h4 class="text-lg font-semibold">Tailwind CSS</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps Skills Section -->
+      <!-- Left Item -->
+      <div class="mb-10 w-full flex justify-start items-center">
+        <div class="w-1/2 pr-8 text-right">
+          <div class="inline-flex items-center justify-end bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="w-6 h-6 mr-2" alt="Docker"/>
+            <h4 class="text-lg font-semibold">Docker</h4>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+      </div>
+
+      <!-- Right Item -->
+      <div class="mb-10 w-full flex justify-end items-center">
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+        <div class="w-1/2 pl-8 text-left">
+          <div class="inline-flex items-center bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" class="w-6 h-6 mr-2" alt="AWS"/>
+            <h4 class="text-lg font-semibold">AWS</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Item -->
+      <div class="mb-10 w-full flex justify-start items-center">
+        <div class="w-1/2 pr-8 text-right">
+          <div class="inline-flex items-center justify-end bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="w-6 h-6 mr-2" alt="Linux"/>
+            <h4 class="text-lg font-semibold">Linux</h4>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+      </div>
+
+      <!-- Right Item -->
+      <div class="mb-10 w-full flex justify-end items-center">
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+        <div class="w-1/2 pl-8 text-left">
+          <div class="inline-flex items-center bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" class="w-6 h-6 mr-2" alt="Jenkins"/>
+            <h4 class="text-lg font-semibold">CI/CD (Jenkins/GitHub Actions)</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add more DevOps skills -->
+      <div class="mb-10 w-full flex justify-start items-center">
+        <div class="w-1/2 pr-8 text-right">
+          <div class="inline-flex items-center justify-end bg-white p-4 rounded-lg shadow card-hover">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="w-6 h-6 mr-2" alt="Kubernetes"/>
+            <h4 class="text-lg font-semibold">Kubernetes</h4>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-1/2 relative">
+          <span class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-orange-500 border-2 border-white"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ================= Projects ================= -->
+<section id="projects" class="py-12 md:py-16 px-4 relative animate-on-scroll">
+  <!-- Background GIF -->
+  <div class="absolute inset-0 -z-10">
+    <img src="img/color-spiral.gif" alt="Background Dots" class="w-full h-full object-cover opacity-20">
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center animate-on-scroll">Projects</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Project 1 -->
+      <div class="bg-white p-6 rounded-lg shadow card-hover animate-on-scroll flex flex-col justify-between">
+        <div>
+          <h4 class="text-lg font-semibold mb-2">WordPress DevOps Pipeline</h4>
+          <p class="text-gray-600 mb-3">
+            Dockerized WordPress deployment with Nginx, GitHub Actions,
+            AWS EC2, and SSL.
+          </p>
+        </div>
+        <a href="https://www.linkedin.com/in/tanmay-sherekar" target="_blank" 
+           class="mt-4 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
+          More Info
+        </a>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="bg-white p-6 rounded-lg shadow card-hover animate-on-scroll flex flex-col justify-between">
+        <div>
+          <h4 class="text-lg font-semibold mb-2">PHP Cloud Application</h4>
+          <p class="text-gray-600 mb-3">
+            PHP + MySQL application deployed on Linux servers
+            with security and performance optimizations.
+          </p>
+        </div>
+        <a href="https://www.linkedin.com/in/tanmay-sherekar" target="_blank" 
+           class="mt-4 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
+          More Info
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="bg-gray-900 text-white py-12 md:py-16 px-4 animate-on-scroll">
+  <div class="max-w-6xl mx-auto text-center">
+    <h3 class="text-3xl md:text-4xl font-extrabold mb-4 text-yellow-400 animate-pulse">
+      Contact Me
+    </h3>
+    <p class="mb-4 text-lg md:text-xl text-gray-200">
+      I’m open for <span class="text-orange-400 font-semibold">opportunities</span> & <span class="text-orange-400 font-semibold">freelance work</span>
+    </p>
+    <p class="text-lg md:text-xl font-semibold">
+      Email:
+      <a href="mailto:tanmay.sherekar@gmail.com" class="text-blue-400 hover:text-blue-500 hover:underline transition duration-300">
+        tanmay.sherekar@gmail.com
+      </a>
+    </p>
+    <div class="mt-6">
+      <a href="https://www.linkedin.com/in/tanmay-sherekar" target="_blank" 
+         class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg transform hover:scale-105 transition duration-300">
+        Connect on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= Footer ================= -->
+<footer class="bg-black text-gray-400 text-center py-4">
+  © 2026 Tanmay. All rights reserved.
+</footer>
+
+<!-- Scroll To Top Button -->
+<button id="scrollTopBtn"
+  class="hidden fixed bottom-6 right-6 w-12 h-12 rounded-full bg-orange-500 text-white font-bold shadow-lg flex items-center justify-center">
+  <span id="scrollPercent">0%</span>
+</button>
+
+
+<!-- ================= Scripts ================= -->
+<script>
+  // Loader
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    loader.classList.add("opacity-0");
+    setTimeout(() => loader.style.display = "none", 500);
+  });
+
+  // Mobile menu
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  // Scroll animations
+  const animatedElements = document.querySelectorAll(".animate-on-scroll");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animatedElements.forEach(el => observer.observe(el));
+
+    const text = "Full Stack PHP & DevOps Engineer";
+  const typingEl = document.getElementById("typing-text");
+  let index = 0;
+
+  function typeEffect() {
+    if (index < text.length) {
+      typingEl.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeEffect, 80);
+    }
+  }
+
+  // Start typing after page load
+  window.addEventListener("load", () => {
+    setTimeout(typeEffect, 700);
+  });
+
+    // Scroll to top + progress
+  window.addEventListener("scroll", () => {
+    const scrollBtn = document.getElementById("scrollTopBtn");
+    const percent = document.getElementById("scrollPercent");
+    const scrolled = Math.round((scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100);
+
+    percent.textContent = scrolled + "%";
+    scrollBtn.classList.toggle("hidden", scrollY < 300);
+  });
+
+  scrollTopBtn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });
+
+const whatsappBtn = document.querySelector(".whatsapp-float");
+
+  window.addEventListener("scroll", () => {
+    whatsappBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+  });
+</script>
+
+</body>
+</html>
